@@ -1,4 +1,4 @@
-import { Home, Compass, Bell, User } from 'lucide-react';
+import { Home, Compass, Bell, User, ShoppingCart } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
 import appPatterns3Left from '../../assets/app_patterns_3_left.png';
 import appPatterns3Right from '../../assets/app_patterns_3_right.png';
@@ -19,6 +19,7 @@ export function NavigationBar() {
     { key: 'home', icon: Home, to: '/' },
     { key: 'categories', icon: Compass, to: '/categories' },
     { key: 'alerts', icon: Bell, to: null },
+    { key: 'cart', icon: ShoppingCart, to: null },
     { key: 'profile', icon: User, to: '/profile' },
   ];
 

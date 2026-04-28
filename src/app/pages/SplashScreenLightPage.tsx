@@ -5,21 +5,44 @@ import appLogo from '../../assets/logo/app_logo.png';
 import appPatterns3Left from '../../assets/app_patterns_3_left.png';
 import appPatterns3Right from '../../assets/app_patterns_3_right.png';
 
-export default function SplashScreenLightPage() {
+type SplashScreenLightPageProps = {
+  onFinish?: () => void;
+  autoCloseMs?: number;
+  fallbackCloseMs?: number;
+};
+
+export default function SplashScreenLightPage({
+  onFinish,
+  autoCloseMs = 5000,
+  fallbackCloseMs = 5000,
+}: SplashScreenLightPageProps = {}) {
   const navigate = useNavigate();
   const [showCloseButton, setShowCloseButton] = useState(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => {
+    const closeTimer = window.setTimeout(() => {
+      if (onFinish) {
+        onFinish();
+        return;
+      }
+      navigate('/', { replace: true });
+    }, autoCloseMs);
+
+    const fallbackTimer = window.setTimeout(() => {
       setShowCloseButton(true);
-    }, 5000);
+    }, fallbackCloseMs);
 
     return () => {
-      window.clearTimeout(timer);
+      window.clearTimeout(closeTimer);
+      window.clearTimeout(fallbackTimer);
     };
-  }, []);
+  }, [autoCloseMs, fallbackCloseMs, navigate, onFinish]);
 
   const handleCloseSplash = () => {
+    if (onFinish) {
+      onFinish();
+      return;
+    }
     navigate('/', { replace: true });
   };
 
@@ -31,7 +54,7 @@ export default function SplashScreenLightPage() {
             type="button"
             onClick={handleCloseSplash}
             aria-label="Close splash screen"
-            className="absolute left-4 top-4 z-30 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#9a4726]/50 bg-white/90 text-[#9a4726] transition hover:bg-[#f8ebe2]"
+            className="absolute right-4 top-4 z-30 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#9a4726]/50 bg-white/90 text-[#9a4726] transition hover:bg-[#f8ebe2]"
           >
             <X className="h-5 w-5" />
           </button>

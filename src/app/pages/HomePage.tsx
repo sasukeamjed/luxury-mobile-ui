@@ -2,6 +2,7 @@ import { type UIEvent, useEffect, useMemo, useState } from 'react';
 import { Candy, Flower2, Gift, Search, Sparkles, Heart } from 'lucide-react';
 import appPatterns from '../../assets/app_patterns.png';
 import appPatterns2 from '../../assets/app_patterns_2.png';
+import appLogo from '../../assets/logo/app_logo.png';
 import { CategoryIcon } from '../components/CategoryIcon';
 import { DraggableScrollRow } from '../components/DraggableScrollRow';
 import { SubcategoryChips } from '../components/SubcategoryChips';
@@ -70,7 +71,7 @@ export default function HomePage() {
       <div className="w-full max-w-[390px] min-h-[844px] bg-[#fbf8f5] rounded-[3rem] shadow-[0_24px_80px_rgba(0,0,0,0.38)] overflow-hidden relative border border-[rgba(255,255,255,0.06)]">
         <div
           className={`absolute left-0 right-0 top-0 z-30 overflow-hidden border-b border-[rgba(0,0,0,0.05)] bg-[#fbf8f5] shadow-[0_6px_18px_rgba(0,0,0,0.05)] transition-all duration-300 ${
-            isAppBarCollapsed ? 'h-[116px]' : 'h-[210px]'
+            isAppBarCollapsed ? 'h-[116px]' : 'h-[232px]'
           }`}
         >
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -102,17 +103,48 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#9a4726] to-[#b85a32] flex items-center justify-center">
-                  <div className="w-6 h-6 border-2 border-white rounded-lg"></div>
+            <div className={`flex items-center justify-between ${isAppBarCollapsed ? 'pt-2' : 'pt-3'}`}>
+              <div className="flex min-w-0 flex-1 items-center gap-3 pr-2">
+                <div
+                  className={`relative shrink-0 overflow-hidden rounded-2xl bg-gradient-to-br from-[#8c3f23] to-[#bf6338] shadow-[0_8px_20px_rgba(154,71,38,0.28)] ring-1 ring-white/55 ${
+                    isAppBarCollapsed ? 'h-10 w-10' : 'h-12 w-12'
+                  }`}
+                >
+                  <img
+                    src={appLogo}
+                    alt="DO Chocolate logo"
+                    className="h-full w-full object-cover opacity-[0.22] mix-blend-screen"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className={`${isAppBarCollapsed ? 'text-[13px]' : 'text-[16px]'} font-semibold tracking-[0.04em] text-white`}>DO</span>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="text-[#1a1a1a]">LUXE</h1>
-                  <p className="text-xs text-[#737373]">Gifts, Flowers & Chocolate</p>
+                <div className="min-w-0">
+                  <h1
+                    className={`bg-gradient-to-r from-[#552617] via-[#7a341d] to-[#a14e2e] bg-clip-text pt-0.5 font-semibold leading-[0.95] tracking-[-0.015em] text-transparent ${
+                      isAppBarCollapsed ? 'truncate text-[22px]' : 'text-[25px] leading-[1.02]'
+                    }`}
+                  >
+                    {isAppBarCollapsed ? (
+                      'Chocolates & Flowers'
+                    ) : (
+                      <>
+                        Chocolates
+                        <br />
+                        & Flowers
+                      </>
+                    )}
+                  </h1>
+                  <p
+                    className={`truncate text-[11px] text-[#7f7a76] transition-all duration-300 ${
+                      isAppBarCollapsed ? 'max-h-0 translate-y-[-4px] opacity-0' : 'max-h-6 translate-y-0 pt-1 opacity-100'
+                    }`}
+                  >
+                    Curated luxury gifts
+                  </p>
                 </div>
               </div>
-              <button className="w-11 h-11 rounded-xl bg-white/85 backdrop-blur-sm border border-[rgba(0,0,0,0.06)] shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex items-center justify-center relative">
+              <button className="relative ml-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[rgba(0,0,0,0.06)] bg-white/85 backdrop-blur-sm shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
                 <Heart className="w-5 h-5 text-[#9a4726]" />
                 <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#9a4726] flex items-center justify-center">
                   <span className="text-[10px] text-white">3</span>
@@ -124,7 +156,7 @@ export default function HomePage() {
               className={`relative transition-all duration-300 ${
                 isAppBarCollapsed
                   ? 'mt-1 max-h-0 translate-y-[-8px] opacity-0 pointer-events-none'
-                  : 'mt-4 max-h-20 translate-y-0 opacity-100'
+                  : 'mt-3 max-h-24 translate-y-0 opacity-100'
               }`}
             >
               <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#737373]" />
@@ -143,7 +175,7 @@ export default function HomePage() {
         >
           <div
             className={`px-6 pb-32 space-y-8 transition-all duration-300 ${
-              isAppBarCollapsed ? 'pt-[126px]' : 'pt-[220px]'
+              isAppBarCollapsed ? 'pt-[126px]' : 'pt-[242px]'
             }`}
           >
             <div className="h-[208px] rounded-3xl p-5 shadow-[0_16px_50px_rgba(105,39,21,0.38)] relative overflow-hidden flex items-end">
