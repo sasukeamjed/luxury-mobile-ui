@@ -13,7 +13,7 @@ interface ProductCardProps {
   onClick?: () => void;
 }
 
-const shellClass = 'relative min-w-[160px] shrink-0';
+const shellClass = 'relative w-[172px] shrink-0';
 
 const linkClassName =
   'block bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-[rgba(0,0,0,0.04)] overflow-hidden cursor-pointer text-left text-inherit no-underline';
