@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.DS_Store
+
+# Exclude Flutter project per request
+dochocolate_splash_screen/
