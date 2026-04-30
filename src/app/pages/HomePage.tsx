@@ -2,7 +2,7 @@ import { type UIEvent, useEffect, useMemo, useState } from 'react';
 import { Candy, Flower2, Gift, Search, Sparkles, Heart } from 'lucide-react';
 import appPatterns from '../../assets/app_patterns.png';
 import appPatterns2 from '../../assets/app_patterns_2.png';
-import appLogo from '../../assets/logo/app_logo.png';
+import appBarLogo from '../../assets/logo/appbar_logo.png';
 import { CategoryIcon } from '../components/CategoryIcon';
 import { DraggableScrollRow } from '../components/DraggableScrollRow';
 import { SubcategoryChips } from '../components/SubcategoryChips';
@@ -104,36 +104,33 @@ export default function HomePage() {
             </div>
 
             <div className={`flex items-center justify-between ${isAppBarCollapsed ? 'pt-2' : 'pt-3'}`}>
-              <div className="flex min-w-0 flex-1 items-center gap-3 pr-2">
+              <div className="flex min-w-0 flex-1 items-center gap-[5px] pr-2">
                 <div
-                  className={`relative shrink-0 overflow-hidden rounded-2xl bg-gradient-to-br from-[#8c3f23] to-[#bf6338] shadow-[0_8px_20px_rgba(154,71,38,0.28)] ring-1 ring-white/55 ${
-                    isAppBarCollapsed ? 'h-10 w-10' : 'h-12 w-12'
+                  className={`relative shrink-0 overflow-hidden rounded-[18px] bg-gradient-to-br from-[#fff8f3] via-[#ffe7d8] to-[#ffd6bc] shadow-[0_14px_30px_rgba(113,45,20,0.24)] ring-1 ring-[#9a4726]/28 ${
+                    isAppBarCollapsed ? 'h-[48px] w-[48px]' : 'h-[58px] w-[58px]'
                   }`}
                 >
                   <img
-                    src={appLogo}
-                    alt="DO Chocolate logo"
-                    className="h-full w-full object-cover opacity-[0.22] mix-blend-screen"
+                    src={appPatterns2}
+                    alt=""
+                    aria-hidden
+                    className="pointer-events-none absolute -right-2 -top-2 h-[130%] w-[130%] max-w-none opacity-[0.18] mix-blend-multiply"
                   />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className={`${isAppBarCollapsed ? 'text-[13px]' : 'text-[16px]'} font-semibold tracking-[0.04em] text-white`}>DO</span>
-                  </div>
+                  <div className="pointer-events-none absolute inset-[1px] rounded-[16px] bg-gradient-to-b from-white/70 to-transparent" />
+                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.72),transparent_55%)]" />
+                  <img
+                    src={appBarLogo}
+                    alt="DO monogram"
+                    className="relative z-10 h-full w-full object-cover saturate-[1.42] contrast-[1.36] brightness-[1.04] [filter:drop-shadow(0_0_0.6px_rgba(255,255,255,0.9))_drop-shadow(0_3px_7px_rgba(122,52,29,0.3))]"
+                  />
                 </div>
                 <div className="min-w-0">
                   <h1
-                    className={`bg-gradient-to-r from-[#552617] via-[#7a341d] to-[#a14e2e] bg-clip-text pt-0.5 font-semibold leading-[0.95] tracking-[-0.015em] text-transparent ${
-                      isAppBarCollapsed ? 'truncate text-[22px]' : 'text-[25px] leading-[1.02]'
+                    className={`bg-gradient-to-r from-[#552617] via-[#7a341d] to-[#a14e2e] bg-clip-text pt-0.5 font-semibold tracking-[-0.015em] text-transparent ${
+                      isAppBarCollapsed ? 'truncate whitespace-nowrap text-[22px] leading-[1]' : 'truncate whitespace-nowrap text-[20px] leading-[1]'
                     }`}
                   >
-                    {isAppBarCollapsed ? (
-                      'Chocolates & Flowers'
-                    ) : (
-                      <>
-                        Chocolates
-                        <br />
-                        & Flowers
-                      </>
-                    )}
+                    Chocolates & Flowers
                   </h1>
                   <p
                     className={`truncate text-[11px] text-[#7f7a76] transition-all duration-300 ${
