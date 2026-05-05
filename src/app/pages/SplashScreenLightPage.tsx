@@ -1,23 +1,17 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { X } from 'lucide-react';
-import appLogo from '../../assets/logo/app_logo.png';
-import appPatterns3Left from '../../assets/app_patterns_3_left.png';
-import appPatterns3Right from '../../assets/app_patterns_3_right.png';
+import appbarLogo from '../../assets/logo/appbar_logo.png';
 
 type SplashScreenLightPageProps = {
   onFinish?: () => void;
   autoCloseMs?: number;
-  fallbackCloseMs?: number;
 };
 
 export default function SplashScreenLightPage({
   onFinish,
   autoCloseMs = 5000,
-  fallbackCloseMs = 5000,
 }: SplashScreenLightPageProps = {}) {
   const navigate = useNavigate();
-  const [showCloseButton, setShowCloseButton] = useState(false);
 
   useEffect(() => {
     const closeTimer = window.setTimeout(() => {
@@ -28,70 +22,78 @@ export default function SplashScreenLightPage({
       navigate('/', { replace: true });
     }, autoCloseMs);
 
-    const fallbackTimer = window.setTimeout(() => {
-      setShowCloseButton(true);
-    }, fallbackCloseMs);
-
     return () => {
       window.clearTimeout(closeTimer);
-      window.clearTimeout(fallbackTimer);
     };
-  }, [autoCloseMs, fallbackCloseMs, navigate, onFinish]);
+  }, [autoCloseMs, navigate, onFinish]);
 
-  const handleCloseSplash = () => {
-    if (onFinish) {
-      onFinish();
-      return;
-    }
-    navigate('/', { replace: true });
-  };
+  const orbitLogoSlots = [0, 1, 2, 3, 4];
 
   return (
     <div className="min-h-screen bg-[#f6f0eb] flex items-center justify-center p-4">
       <div className="relative h-[844px] w-full max-w-[390px] overflow-hidden rounded-[3rem] border border-[#d6c4b9] bg-[#fffaf6] shadow-[0_24px_80px_rgba(82,38,20,0.18)]">
-        {showCloseButton ? (
-          <button
-            type="button"
-            onClick={handleCloseSplash}
-            aria-label="Close splash screen"
-            className="absolute right-4 top-4 z-30 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#9a4726]/50 bg-white/90 text-[#9a4726] transition hover:bg-[#f8ebe2]"
-          >
-            <X className="h-5 w-5" />
-          </button>
-        ) : null}
-
         <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <img
-            src={appPatterns3Left}
-            alt=""
-            className="absolute -left-[198px] -top-[22px] h-[644px] w-[503px] rotate-[15deg] origin-top-left object-contain opacity-[0.22] mix-blend-multiply"
-          />
-          <img
-            src={appPatterns3Right}
-            alt=""
-            className="absolute -right-[198px] -bottom-[22px] h-[644px] w-[503px] -rotate-[15deg] origin-bottom-right object-contain opacity-[0.22] mix-blend-multiply"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#9a4726]/10 via-[#fff7f1]/50 to-[#9a4726]/10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#fff7f1] via-[#f8e6d9] to-[#f1d8c8]" />
+          <div className="absolute inset-y-0 left-1/2 w-[160px] -translate-x-1/2 overflow-hidden border-x border-[#9a4726]/10 bg-gradient-to-b from-[#fff2e9]/70 via-[#f7dfcf]/72 to-[#fff2e9]/70">
+            <div className="splash-logo-track absolute inset-0">
+              <div className="splash-logo-stack">
+                {orbitLogoSlots.map((slot) => (
+                  <img key={`logo-top-${slot}`} src={appbarLogo} alt="" className="h-[120px] w-[120px] object-contain opacity-[0.22]" />
+                ))}
+              </div>
+              <div className="splash-logo-stack">
+                {orbitLogoSlots.map((slot) => (
+                  <img key={`logo-bottom-${slot}`} src={appbarLogo} alt="" className="h-[120px] w-[120px] object-contain opacity-[0.22]" />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0),rgba(255,247,241,0.58)_46%,rgba(255,247,241,0.94)_100%)]" />
         </div>
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(154,71,38,0.18),rgba(255,255,255,0)_62%)] animate-pulse" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_52%,rgba(154,71,38,0.10),rgba(255,255,255,0)_74%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(199,115,73,0.16),rgba(255,255,255,0)_8%)] animate-ping" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(154,71,38,0.18),rgba(255,255,255,0)_62%)]" />
 
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className="relative mb-10">
-            <div className="absolute inset-x-[-44px] inset-y-[-24px] rounded-[999px] border border-[#9a4726]/35 animate-[pulse_2.8s_ease-in-out_infinite]" />
-            <div className="absolute inset-x-[-28px] inset-y-[-14px] rounded-[999px] border border-[#9a4726]/45" />
-            <div className="absolute inset-x-[-52px] inset-y-[-34px] rounded-[999px] bg-[#c77349]/10 blur-2xl" />
+          <div className="relative mb-12">
+            <div className="absolute inset-[-28px] rounded-[2.6rem] border border-[#9a4726]/26 bg-white/78 shadow-[0_28px_80px_rgba(95,39,18,0.25)]" />
+            <div className="absolute inset-[-42px] rounded-[3rem] border border-[#9a4726]/34 animate-[pulse_2.2s_ease-in-out_infinite]" />
+            <div className="absolute inset-[-70px] rounded-[3.4rem] bg-[#c77349]/22 blur-3xl" />
             <img
-              src={appLogo}
+              src={appbarLogo}
               alt="DO Chocolates and Flowers"
-              className="relative z-10 w-[236px] max-w-[74vw] animate-[pulse_2.6s_ease-in-out_infinite]"
+              className="relative z-10 w-[216px] max-w-[68vw] drop-shadow-[0_16px_30px_rgba(88,34,16,0.4)]"
             />
           </div>
 
-          <p className="text-[#a85c39] text-xs tracking-[0.35em] uppercase animate-pulse">Chocolates and Flowers</p>
+          <div className="rounded-full border border-[#9a4726]/20 bg-white/88 px-6 py-2 shadow-[0_10px_24px_rgba(119,53,27,0.16)]">
+            <p className="text-[#8b3e20] text-[11px] tracking-[0.34em] uppercase">Chocolates and Flowers</p>
+          </div>
         </div>
+        <style>{`
+          .splash-logo-track {
+            height: 200%;
+            animation: splash-logo-rise 13s linear infinite;
+          }
+
+          .splash-logo-stack {
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            padding: 28px 0;
+          }
+
+          @keyframes splash-logo-rise {
+            from {
+              transform: translateY(0);
+            }
+            to {
+              transform: translateY(-50%);
+            }
+          }
+        `}</style>
       </div>
     </div>
   );

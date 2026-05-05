@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router';
+import { Navigate, Route, Routes, useLocation } from 'react-router';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
 import ProfilePage from './pages/ProfilePage';
@@ -9,6 +9,8 @@ import CategoriesPage from './pages/CategoriesPage.tsx';
 
 export default function App() {
   const [showStartupSplash, setShowStartupSplash] = useState(true);
+  const location = useLocation();
+  const shouldShowStartupSplash = showStartupSplash && location.pathname === '/';
 
   return (
     <>
@@ -23,12 +25,11 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
-      {showStartupSplash ? (
+      {shouldShowStartupSplash ? (
         <div className="fixed inset-0 z-[120]">
           <SplashScreenPage
             onFinish={() => setShowStartupSplash(false)}
             autoCloseMs={10000}
-            fallbackCloseMs={10000}
           />
         </div>
       ) : null}
