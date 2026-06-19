@@ -1,4 +1,5 @@
 import { type UIEvent, useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router';
 import { Candy, Flower2, Gift, Search, Sparkles, Heart } from 'lucide-react';
 import appPatterns from '../../assets/app_patterns.png';
 import appPatterns2 from '../../assets/app_patterns_2.png';
@@ -7,8 +8,9 @@ import { CategoryIcon } from '../components/CategoryIcon';
 import { DraggableScrollRow } from '../components/DraggableScrollRow';
 import { SubcategoryChips } from '../components/SubcategoryChips';
 import { ProductCard } from '../components/ProductCard';
-import { NavigationBar } from '../components/NavigationBar';
+import { MobileNavDock } from '../components/MobileNavDock';
 import { type MainCategoryId, getProductsForMainCategory, getProductsForSubcategory, PRODUCTS } from '../data/products';
+import { FAVORITE_PRODUCT_IDS } from '../data/favorites';
 import { SUBCATEGORIES_BY_MAIN } from '../data/subcategories';
 
 export default function HomePage() {
@@ -141,12 +143,16 @@ export default function HomePage() {
                   </p>
                 </div>
               </div>
-              <button className="relative ml-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[rgba(0,0,0,0.06)] bg-white/85 backdrop-blur-sm shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
+              <Link
+                to="/favorites"
+                className="relative ml-3 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[rgba(0,0,0,0.06)] bg-white/85 backdrop-blur-sm shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition hover:bg-white"
+                aria-label="Favorites"
+              >
                 <Heart className="w-5 h-5 text-[#9a4726]" />
                 <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#9a4726] flex items-center justify-center">
-                  <span className="text-[10px] text-white">3</span>
+                  <span className="text-[10px] text-white">{FAVORITE_PRODUCT_IDS.length}</span>
                 </div>
-              </button>
+              </Link>
             </div>
 
             <div
@@ -167,7 +173,7 @@ export default function HomePage() {
         </div>
 
         <div
-          className="h-[calc(844px-96px)] overflow-y-auto relative z-10"
+          className="absolute inset-x-0 top-0 bottom-[112px] z-0 overflow-y-auto"
           onScroll={handleMainScroll}
         >
           <div
@@ -340,15 +346,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Fade scroll behind nav — must sit *below* corner pattern or the cream covers it */}
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-[18] h-[280px] bg-gradient-to-t from-[#fbf8f5] via-[#fbf8f5]/92 to-transparent"
-          aria-hidden
-        />
-
-        <div className="absolute bottom-0 left-0 right-0 z-[22] px-6 pb-8 pt-6">
-          <NavigationBar />
-        </div>
+        <MobileNavDock withGradient />
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import appPatterns2 from '../../assets/app_patterns_2.png';
 import appPatterns3Right from '../../assets/app_patterns_3_right.png';
 import { DraggableScrollRow } from '../components/DraggableScrollRow';
-import { NavigationBar } from '../components/NavigationBar';
+import { MobileNavDock } from '../components/MobileNavDock';
 import { SUBCATEGORIES_BY_MAIN, type Subcategory } from '../data/subcategories';
 import { type MainCategoryId, getProductsForSubcategory } from '../data/products';
 
@@ -101,7 +101,7 @@ export default function CategoriesPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#fbf8f5]/48 via-[#fbf8f5]/86 to-[#fbf8f5]" />
         </div>
 
-        <div className="relative z-10 h-[calc(844px-96px)] overflow-y-auto pb-32">
+        <div className="absolute inset-x-0 top-0 bottom-[112px] z-0 overflow-y-auto pb-8">
           <div className="relative h-[204px] overflow-hidden border-b border-[rgba(0,0,0,0.05)]">
             <div className="absolute inset-0 bg-gradient-to-br from-[#3e1b12]/75 via-[#6f341f]/58 to-[#9a4726]/46" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,255,255,0.24),rgba(255,255,255,0)_55%)]" />
@@ -225,11 +225,7 @@ export default function CategoriesPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[18] h-[280px] bg-gradient-to-t from-[#fbf8f5] via-[#fbf8f5]/92 to-transparent" />
-
-        <div className="absolute bottom-0 left-0 right-0 z-[22] px-6 pb-8 pt-6">
-          <NavigationBar />
-        </div>
+        <MobileNavDock withGradient />
       </div>
     </div>
   );

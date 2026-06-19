@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router';
 import appPatterns from '../../assets/app_patterns.png';
 import appPatterns2 from '../../assets/app_patterns_2.png';
 import { ProductCard } from '../components/ProductCard';
-import { NavigationBar } from '../components/NavigationBar';
+import { MobileNavDock } from '../components/MobileNavDock';
 import { DraggableScrollRow } from '../components/DraggableScrollRow';
 import { getProductById, PRODUCTS } from '../data/products';
 
@@ -100,7 +100,7 @@ export default function ProductPage() {
         </div>
 
         <div
-          className="absolute inset-0 z-10 overflow-y-auto overscroll-y-contain px-6 pb-36"
+          className="absolute inset-x-0 top-0 bottom-[112px] z-0 overflow-y-auto overscroll-y-contain px-6 pb-8"
           style={{ paddingTop: APP_BAR_PAD_TOP }}
           onScroll={handleMainScroll}
         >
@@ -199,9 +199,7 @@ export default function ProductPage() {
           )}
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-[#fbf8f5] via-[#fbf8f5] to-transparent px-6 pb-8 pt-8">
-          <NavigationBar />
-        </div>
+        <MobileNavDock withGradient />
       </div>
     </div>
   );

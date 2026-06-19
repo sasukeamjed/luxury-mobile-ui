@@ -1,31 +1,42 @@
 import { Home, Compass, Bell, User, ShoppingCart } from 'lucide-react';
-import { Link, useLocation } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 import appPatterns3Left from '../../assets/app_patterns_3_left.png';
 import appPatterns3Right from '../../assets/app_patterns_3_right.png';
+
+const items = [
+  { key: 'home', icon: Home, to: '/' },
+  { key: 'categories', icon: Compass, to: '/categories' },
+  { key: 'alerts', icon: Bell, to: '/notifications' },
+  { key: 'cart', icon: ShoppingCart, to: null },
+  { key: 'profile', icon: User, to: '/profile' },
+] as const;
+
+function isItemActive(key: (typeof items)[number]['key'], pathname: string) {
+  if (key === 'home') return pathname === '/' || pathname.startsWith('/product');
+  if (key === 'categories') return pathname.startsWith('/categories');
+  if (key === 'alerts') return pathname.startsWith('/notifications');
+  if (key === 'profile') {
+    return pathname.startsWith('/profile') || pathname.startsWith('/settings') || pathname.startsWith('/splash') || pathname.startsWith('/login') || pathname.startsWith('/signup') || pathname.startsWith('/orders');
+  }
+  return false;
+}
+
+const tabClassName = (active: boolean) =>
+  `relative touch-manipulation min-h-12 min-w-12 p-3 rounded-2xl transition-all duration-300 ${
+    active
+      ? 'bg-gradient-to-br from-[#b05a34] via-[#9a4726] to-[#7f331d] text-white shadow-[0_10px_22px_rgba(154,71,38,0.34)]'
+      : 'bg-white/75 text-[#9a4726] shadow-[0_2px_10px_rgba(154,71,38,0.08)] hover:bg-[#fdf0e6] hover:shadow-[0_4px_14px_rgba(154,71,38,0.12)]'
+  }`;
 
 export function NavigationBar() {
   const { pathname } = useLocation();
 
-  const isActive = (key: string) => {
-    if (key === 'home') return pathname === '/' || pathname.startsWith('/product');
-    if (key === 'categories') return pathname.startsWith('/categories');
-    if (key === 'profile') {
-      return pathname.startsWith('/profile') || pathname.startsWith('/settings') || pathname.startsWith('/splash');
-    }
-    return false;
-  };
-
-  const items = [
-    { key: 'home', icon: Home, to: '/' },
-    { key: 'categories', icon: Compass, to: '/categories' },
-    { key: 'alerts', icon: Bell, to: null },
-    { key: 'cart', icon: ShoppingCart, to: null },
-    { key: 'profile', icon: User, to: '/profile' },
-  ];
-
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-[#e8ddd6] bg-gradient-to-b from-[#fffdfa] via-[#fffaf6] to-[#f8f1eb] p-4 shadow-[0_16px_34px_rgba(154,71,38,0.12)]">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+    <nav
+      aria-label="Main navigation"
+      className="pointer-events-auto relative z-[100] overflow-visible rounded-3xl border border-[#e8ddd6] bg-gradient-to-b from-[#fffdfa] via-[#fffaf6] to-[#f8f1eb] p-4 shadow-[0_16px_34px_rgba(154,71,38,0.12)]"
+    >
+      <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl" aria-hidden>
         <img
           src={appPatterns3Left}
           alt=""
@@ -42,41 +53,36 @@ export function NavigationBar() {
       <div className="relative z-10 flex items-center justify-around">
         {items.map((item) => {
           const Icon = item.icon;
-          const active = isActive(item.key);
-          const content = (
-            <>
-              <Icon className="w-6 h-6" />
-              {active && <div className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-[#f6d4bc]" />}
-            </>
-          );
+          const active = isItemActive(item.key, pathname);
 
-          return (
-            item.to ? (
-              <Link
+          if (item.to) {
+            return (
+              <NavLink
                 key={item.key}
                 to={item.to}
-                className={`relative p-3 rounded-2xl transition-all duration-300 ${
-                  active
-                    ? 'bg-gradient-to-br from-[#b05a34] via-[#9a4726] to-[#7f331d] text-white shadow-[0_10px_22px_rgba(154,71,38,0.34)]'
-                    : 'text-[#7b746f] hover:bg-[#f7ece4] hover:text-[#9a4726]'
-                }`}
+                end={item.key === 'home'}
+                className={tabClassName(active)}
                 aria-label={item.key}
+                aria-current={active ? 'page' : undefined}
               >
-                {content}
-              </Link>
-            ) : (
-              <button
-                key={item.key}
-                type="button"
-                className="relative p-3 rounded-2xl text-[#7b746f] transition-all duration-300 hover:bg-[#f7ece4] hover:text-[#9a4726]"
-                aria-label={item.key}
-              >
-                {content}
-              </button>
-            )
+                <Icon className="h-6 w-6" />
+                {active ? <div className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-[#f6d4bc]" /> : null}
+              </NavLink>
+            );
+          }
+
+          return (
+            <button
+              key={item.key}
+              type="button"
+              className={tabClassName(false)}
+              aria-label={item.key}
+            >
+              <Icon className="h-6 w-6" />
+            </button>
           );
         })}
       </div>
-    </div>
+    </nav>
   );
 }
