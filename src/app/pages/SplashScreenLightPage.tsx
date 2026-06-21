@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import appbarLogo from '../../assets/logo/appbar_logo.png';
+import { MobileStage, PHONE_FRAME_CLASS } from '../components/MobileFrame';
+import { cn } from '../components/ui/utils';
 
 type SplashScreenLightPageProps = {
   onFinish?: () => void;
   autoCloseMs?: number;
+  fill?: boolean;
 };
 
 export default function SplashScreenLightPage({
   onFinish,
   autoCloseMs = 5000,
+  fill = false,
 }: SplashScreenLightPageProps = {}) {
   const navigate = useNavigate();
 
@@ -30,8 +34,8 @@ export default function SplashScreenLightPage({
   const orbitLogoSlots = [0, 1, 2, 3, 4];
 
   return (
-    <div className="min-h-screen bg-[#f6f0eb] flex items-center justify-center p-4">
-      <div className="relative h-[844px] w-full max-w-[390px] overflow-hidden rounded-[3rem] border border-[#d6c4b9] bg-[#fffaf6] shadow-[0_24px_80px_rgba(82,38,20,0.18)]">
+    <MobileStage fill={fill}>
+      <div className={cn(PHONE_FRAME_CLASS, 'relative bg-[#fffaf6]')}>
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <div className="absolute inset-0 bg-gradient-to-b from-[#fff7f1] via-[#f8e6d9] to-[#f1d8c8]" />
           <div className="absolute inset-y-0 left-1/2 w-[160px] -translate-x-1/2 overflow-hidden border-x border-[#9a4726]/10 bg-gradient-to-b from-[#fff2e9]/70 via-[#f7dfcf]/72 to-[#fff2e9]/70">
@@ -95,6 +99,6 @@ export default function SplashScreenLightPage({
           }
         `}</style>
       </div>
-    </div>
+    </MobileStage>
   );
 }

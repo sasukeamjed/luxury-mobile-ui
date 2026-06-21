@@ -9,6 +9,8 @@ import { DraggableScrollRow } from '../components/DraggableScrollRow';
 import { SubcategoryChips } from '../components/SubcategoryChips';
 import { ProductCard } from '../components/ProductCard';
 import { MobileNavDock } from '../components/MobileNavDock';
+import { MobileStage, PHONE_FRAME_CLASS } from '../components/MobileFrame';
+import { cn } from '../components/ui/utils';
 import { type MainCategoryId, getProductsForMainCategory, getProductsForSubcategory, PRODUCTS } from '../data/products';
 import { FAVORITE_PRODUCT_IDS } from '../data/favorites';
 import { SUBCATEGORIES_BY_MAIN } from '../data/subcategories';
@@ -69,8 +71,8 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a0a] via-[#151515] to-[#0a0a0a] flex items-center justify-center p-4">
-      <div className="w-full max-w-[390px] min-h-[844px] bg-[#fbf8f5] rounded-[3rem] shadow-[0_24px_80px_rgba(0,0,0,0.38)] overflow-hidden relative border border-[rgba(255,255,255,0.06)]">
+    <MobileStage>
+      <div className={cn(PHONE_FRAME_CLASS, 'relative')}>
         <div
           className={`absolute left-0 right-0 top-0 z-30 overflow-hidden border-b border-[rgba(0,0,0,0.05)] bg-[#fbf8f5] shadow-[0_6px_18px_rgba(0,0,0,0.05)] transition-all duration-300 ${
             isAppBarCollapsed ? 'h-[116px]' : 'h-[232px]'
@@ -348,7 +350,7 @@ export default function HomePage() {
 
         <MobileNavDock withGradient />
       </div>
-    </div>
+    </MobileStage>
   );
 }
 

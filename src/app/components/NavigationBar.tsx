@@ -16,7 +16,7 @@ function isItemActive(key: (typeof items)[number]['key'], pathname: string) {
   if (key === 'categories') return pathname.startsWith('/categories');
   if (key === 'alerts') return pathname.startsWith('/notifications');
   if (key === 'profile') {
-    return pathname.startsWith('/profile') || pathname.startsWith('/settings') || pathname.startsWith('/splash') || pathname.startsWith('/login') || pathname.startsWith('/signup') || pathname.startsWith('/orders');
+    return pathname.startsWith('/profile') || pathname.startsWith('/settings') || pathname.startsWith('/splash') || pathname.startsWith('/login') || pathname.startsWith('/signup') || pathname.startsWith('/orders') || pathname.startsWith('/notification-permission');
   }
   return false;
 }

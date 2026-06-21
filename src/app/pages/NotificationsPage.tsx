@@ -9,6 +9,7 @@ import {
   Truck,
 } from 'lucide-react';
 import { Link } from 'react-router';
+import { DraggableScrollRow } from '../components/DraggableScrollRow';
 import { MobileShell } from '../components/MobileShell';
 import {
   NOTIFICATIONS,
@@ -203,7 +204,7 @@ export default function NotificationsPage() {
             </div>
           </div>
 
-          <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
+          <DraggableScrollRow className="mt-4 flex gap-2 pb-1">
             {FILTERS.map((filter) => {
               const active = activeFilter === filter.key;
               return (
@@ -221,9 +222,9 @@ export default function NotificationsPage() {
                 </button>
               );
             })}
-          </div>
+          </DraggableScrollRow>
 
-          <div className="mt-5 space-y-5">
+          <div className="mt-5 space-y-5 pb-8">
             {todayItems.length > 0 ? (
               <section>
                 <p className="mb-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#9a4726]/72">

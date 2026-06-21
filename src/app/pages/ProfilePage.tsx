@@ -1,4 +1,4 @@
-import { ChevronRight, LogIn, Package, Settings, UserRound } from 'lucide-react';
+import { Bell, ChevronRight, LogIn, Package, Settings, UserRound } from 'lucide-react';
 import { Link } from 'react-router';
 import { MobileShell } from '../components/MobileShell';
 
@@ -38,6 +38,21 @@ export default function ProfilePage() {
             <span>
               <span className="block text-sm font-medium">Order History</span>
               <span className="block text-xs text-[#8a8a8a]">View past orders and delivery status</span>
+            </span>
+          </span>
+          <ChevronRight className="h-5 w-5 text-[#9a4726]" />
+        </Link>
+        <Link
+          to="/notifications"
+          className="flex items-center justify-between rounded-2xl px-4 py-4 text-[#1a1a1a] transition hover:bg-[#fdf6f0]"
+        >
+          <span className="inline-flex items-center gap-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#fee0cf]/45 text-[#9a4726]">
+              <Bell className="h-5 w-5" />
+            </span>
+            <span>
+              <span className="block text-sm font-medium">Notifications</span>
+              <span className="block text-xs text-[#8a8a8a]">Order updates, offers, and reminders</span>
             </span>
           </span>
           <ChevronRight className="h-5 w-5 text-[#9a4726]" />
